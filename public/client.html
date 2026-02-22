@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>דוח מענקים</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C8A96E;--gold-light:#E8D5A3;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Heebo',sans-serif;background:#F7F5F0;color:#1a1a1a;direction:rtl;}
+.cv-header{background:#1a1a1a;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.cv-logo{font-size:1.5rem;font-weight:900;color:var(--gold);}
+.cv-logo-sub{color:#888;font-size:0.8rem;margin-top:0.15rem;}
+.cv-cn{font-size:1.1rem;font-weight:700;color:#fff;}
+.cv-date{font-size:0.73rem;color:#888;margin-top:0.15rem;}
+.cv-hero{background:linear-gradient(135deg,#1a1a1a,#2c2c2c);padding:3rem;color:#fff;position:relative;overflow:hidden;}
+.cv-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:380px;height:380px;background:radial-gradient(circle,rgba(200,169,110,0.12),transparent 70%);}
+.cv-greeting{font-size:0.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:0.7rem;font-weight:600;}
+.cv-hero h1{font-size:1.9rem;font-weight:900;margin-bottom:0.75rem;line-height:1.3;}
+.cv-hero p{font-size:0.9rem;color:#bbb;max-width:600px;line-height:1.75;}
+.cv-note{background:rgba(200,169,110,0.1);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:0.85rem 1.2rem;margin-top:1.2rem;font-size:0.83rem;color:#ccc;font-style:italic;}
+.cv-main{max-width:1050px;margin:0 auto;padding:2.5rem 2rem;}
+.cv-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:2rem;}
+.cv-stat{background:#fff;border-radius:10px;padding:1.1rem 1.3rem;box-shadow:0 2px 12px rgba(0,0,0,0.05);border-bottom:3px solid var(--gold);}
+.cv-sn{font-size:1.8rem;font-weight:900;}
+.cv-sl{font-size:0.73rem;color:#888;margin-top:0.12rem;}
+.cv-table-wrap{background:#fff;border-radius:12px;box-shadow:0 4px 25px rgba(0,0,0,0.07);overflow:hidden;margin-bottom:2rem;}
+.cv-th{background:#1a1a1a;padding:1.1rem 1.8rem;color:#fff;}
+.cv-th h2{font-size:0.98rem;font-weight:700;}
+.cv-th p{font-size:0.73rem;color:#888;margin-top:0.15rem;}
+.cv-table{width:100%;border-collapse:collapse;}
+.cv-table th{padding:0.8rem 1.2rem;text-align:right;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.7px;color:#888;font-weight:700;background:#fafaf8;border-bottom:1px solid #eee;}
+.cv-table td{padding:1rem 1.2rem;border-bottom:1px solid #f2f2f2;vertical-align:middle;}
+.cv-table tr:last-child td{border-bottom:none;}
+.cv-table tr:hover td{background:#fdfcf9;}
+.cg-name{font-weight:700;color:#1a1a1a;font-size:0.87rem;}
+.cg-org{font-size:0.71rem;color:#888;margin-top:0.1rem;}
+.cg-cat{display:inline-block;background:#f3f4f6;border-radius:4px;padding:0.15rem 0.5rem;font-size:0.7rem;color:#555;font-weight:500;}
+.cg-amount{font-weight:800;color:#1a1a1a;font-size:0.88rem;}
+.cg-sub{font-size:0.68rem;color:#aaa;}
+.cg-deadline{font-size:0.8rem;color:#333;}
+.cg-deadline.urgent{color:#d97706;font-weight:700;}
+.cv-badge{display:inline-flex;align-items:center;padding:0.2rem 0.65rem;border-radius:50px;font-size:0.68rem;font-weight:700;}
+.cv-open{background:#dcfce7;color:#16a34a;}
+.cv-soon{background:#fef3c7;color:#d97706;}
+.cv-review{background:#dbeafe;color:#2563eb;}
+.cv-closed{background:#fee2e2;color:#dc2626;}
+.match-row{display:flex;align-items:center;gap:6px;}
+.match-bg{height:5px;width:55px;background:#eee;border-radius:3px;overflow:hidden;}
+.match-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;}
+.match-pct{font-size:0.75rem;font-weight:700;}
+.cv-cta{background:#fff;border-radius:12px;padding:2rem;text-align:center;box-shadow:0 2px 15px rgba(0,0,0,0.06);border-top:4px solid var(--gold);margin-bottom:2rem;}
+.cv-cta h3{font-size:1.05rem;font-weight:800;margin-bottom:0.4rem;}
+.cv-cta p{font-size:0.85rem;color:#666;margin-bottom:1.1rem;}
+.cv-contacts{display:flex;gap:0.7rem;justify-content:center;flex-wrap:wrap;}
+.cv-contact-btn{background:#1a1a1a;color:#fff;padding:0.55rem 1.2rem;border-radius:7px;text-decoration:none;font-size:0.83rem;font-weight:600;font-family:'Heebo',sans-serif;}
+.cv-footer{background:#1a1a1a;padding:1.4rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.cv-footer-logo{font-size:1.05rem;font-weight:900;color:var(--gold);}
+.loading{display:flex;align-items:center;justify-content:center;height:60vh;font-size:1rem;color:#888;}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+@media(max-width:600px){.cv-header,.cv-hero,.cv-footer{padding:1.5rem;}.cv-main{padding:1.5rem 1rem;}.cv-hero h1{font-size:1.5rem;}}
+</style>
+</head>
+<body>
+<div id="root"><div class="loading">טוען דוח מענקים...</div></div>
+
+<script>
+const id = window.location.pathname.split('/').pop();
+const statusLabel = {open:'פתוח',soon:'עומד לפוג',review:'בבדיקה',closed:'סגור'};
+const statusClass = {open:'cv-open',soon:'cv-soon',review:'cv-review',closed:'cv-closed'};
+
+async function loadClient() {
+  try {
+    const r = await fetch(`/api/client/${id}`);
+    if (!r.ok) throw new Error('not found');
+    const c = await r.json();
+    render(c);
+    // Auto-print if ?print=1
+    if (new URLSearchParams(window.location.search).get('print') === '1') {
+      setTimeout(() => window.print(), 800);
+    }
+  } catch(e) {
+    document.getElementById('root').innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;gap:1rem;text-align:center;font-family:'Heebo',sans-serif;">
+        <div style="font-size:2.5rem;">🔍</div>
+        <h2 style="font-size:1.2rem;">הדף לא נמצא</h2>
+        <p style="color:#888;font-size:0.9rem;">ייתכן שהלינק שגוי או שפג תוקפו</p>
+      </div>`;
+  }
+}
+
+function render(c) {
+  const today = new Date().toLocaleDateString('he-IL');
+  const grants = (c.grants || []).filter(g => g.name);
+  const openCount = grants.filter(g=>g.status==='open').length;
+  const soonCount = grants.filter(g=>g.status==='soon').length;
+  const contactFirst = c.contact ? c.contact.split(' ')[0] : c.name;
+
+  const rows = grants.map((g,i) => `
+    <tr>
+      <td style="color:#aaa;font-size:0.75rem;">${String(i+1).padStart(2,'0')}</td>
+      <td><div class="cg-name">${g.name||'—'}</div><div class="cg-org">${g.org||''}</div></td>
+      <td><span class="cg-cat">${g.cat||'—'}</span></td>
+      <td><div class="cg-amount">${g.amount||'—'}</div>${g.cover?`<div class="cg-sub">כיסוי: ${g.cover}</div>`:''}</td>
+      <td class="cg-deadline${g.status==='soon'?' urgent':''}">${g.deadline||'—'}</td>
+      <td><span class="cv-badge ${statusClass[g.status]||'cv-open'}">${statusLabel[g.status]||g.status}</span></td>
+      <td><div class="match-row">
+        <div class="match-bg"><div class="match-fill" style="width:${g.match_pct||70}%"></div></div>
+        <span class="match-pct">${g.match_pct||70}%</span>
+      </div></td>
+    </tr>`).join('');
+
+  document.title = `דוח מענקים – ${c.name}`;
+  document.getElementById('root').innerHTML = `
+    <div class="cv-header">
+      <div>
+        <div class="cv-logo">מענקים בקליק ✦</div>
+        <div class="cv-logo-sub">מאתרים את המימון המתאים עבורכם</div>
+      </div>
+      <div style="text-align:left">
+        <div class="cv-cn">${c.name}${c.contact?' · '+c.contact:''}</div>
+        <div class="cv-date">הופק: ${today}${c.sector?' | '+c.sector:''}</div>
+      </div>
+    </div>
+    <div class="cv-hero">
+      <div class="cv-greeting">דוח מענקים מותאם אישית</div>
+      <h1>שלום${c.contact?', '+contactFirst:''},<br>ריכזנו ${grants.length} מענקים עבורך</h1>
+      <p>${c.message||'לאחר בחינת פרופיל העסק שלך, ריכזנו עבורך את ההזדמנויות המימוניות הרלוונטיות ביותר.'}</p>
+      <div class="cv-note">הדוח הוכן במיוחד עבור <strong>${c.name}</strong> — לפרטים נוספים ולהגשה, פנה אלינו ישירות.</div>
+    </div>
+    <div class="cv-main">
+      <div class="cv-stats">
+        <div class="cv-stat"><div class="cv-sn">${grants.length}</div><div class="cv-sl">מענקים רלוונטיים</div></div>
+        <div class="cv-stat"><div class="cv-sn" style="color:#16a34a">${openCount}</div><div class="cv-sl">פתוחים להגשה</div></div>
+        <div class="cv-stat"><div class="cv-sn" style="color:#d97706">${soonCount}</div><div class="cv-sl">עומדים לפוג</div></div>
+      </div>
+      <div class="cv-table-wrap">
+        <div class="cv-th"><h2>📋 מענקים מותאמים לעסק שלך</h2><p>ממוין לפי רמת התאמה</p></div>
+        <table class="cv-table">
+          <thead><tr><th>#</th><th>שם המענק</th><th>קטגוריה</th><th>סכום מימון</th><th>דדליין</th><th>סטטוס</th><th>התאמה</th></tr></thead>
+          <tbody>${rows||`<tr><td colspan="7" style="text-align:center;padding:2rem;color:#aaa">טרם נוספו מענקים לדוח זה</td></tr>`}</tbody>
+        </table>
+      </div>
+      ${(c.phone||c.email)?`
+      <div class="cv-cta">
+        <h3>מעוניין להגיש? אנחנו כאן</h3>
+        <p>${c.contact?'פנה אל '+c.contact+' ל':''}מידע נוסף, הגשת בקשות, וליווי מלא.</p>
+        <div class="cv-contacts">
+          ${c.phone?`<a href="tel:${c.phone}" class="cv-contact-btn">📞 ${c.phone}</a>`:''}
+          ${c.email?`<a href="mailto:${c.email}" class="cv-contact-btn">✉️ ${c.email}</a>`:''}
+        </div>
+      </div>`:''}
+    </div>
+    <div class="cv-footer">
+      <div class="cv-footer-logo">מענקים בקליק ✦</div>
+      <div style="font-size:0.73rem;color:#666">הופק ע"י: ${c.presenter||'מענקים בקליק'} · ${today}</div>
+    </div>`;
+}
+
+loadClient();
+</script>
+</body>
+</html>

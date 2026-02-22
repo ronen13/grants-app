@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: grants-in-click
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: ADMIN_PASSWORD
+        generateValue: false
+      - key: NODE_ENV
+        value: production
